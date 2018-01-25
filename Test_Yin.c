@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 
 	while (pitch < 10 ) {
 		Yin_init(&yin, buffer_length, 0.05);
-		pitch = Yin_getPitch(&yin, audio);	
+		pitch = Yin_getPitch(&yin, audio, 44100);
 		buffer_length++;
 	}
 	

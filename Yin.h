@@ -3,9 +3,6 @@
 
 #include <stdint.h>
 
-#define YIN_SAMPLING_RATE 44100
-#define YIN_DEFAULT_THRESHOLD 0.15
-
 /**
  * @struct  Yin
  * @breif	Object to encapsulate the parameters for the Yin pitch detection algorithm 
@@ -28,11 +25,12 @@ void Yin_init(Yin *yin, int16_t bufferSize, float threshold);
 
 /**
  * Runs the Yin pitch detection algortihm
- * @param  yin    Initialised Yin object
- * @param  buffer Buffer of samples to analyse
- * @return        Fundamental frequency of the signal in Hz. Returns -1 if pitch can't be found
+ * @param  yin           Initialised Yin object
+ * @param  buffer        Buffer of samples to analyse
+ * @param  sampling_Rate Sampling rate of buffer
+ * @return               Fundamental frequency of the signal in Hz. Returns -1 if pitch can't be found
  */
-float Yin_getPitch(Yin *yin, int16_t* buffer);
+float Yin_getPitch(Yin *yin, int16_t* buffer, int sampling_rate);
 
 /**
  * Certainty of the pitch found 
