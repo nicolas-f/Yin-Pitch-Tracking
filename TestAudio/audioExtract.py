@@ -11,7 +11,7 @@ length = waveFile.getnframes()
 audioData = []
 
 # Extract all the samples from the audio file into an array
-for i in range(0,length):    
+for i in range(0,length):
     waveData = waveFile.readframes(1)
     data = struct.unpack("<h", waveData)
     audioData.append(data[0])

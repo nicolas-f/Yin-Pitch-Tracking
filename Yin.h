@@ -8,7 +8,7 @@
 
 /**
  * @struct  Yin
- * @breif	Object to encapsulate the parameters for the Yin pitch detection algorithm 
+ * @breif	Object to encapsulate the parameters for the Yin pitch detection algorithm
  */
 typedef struct _Yin {
 	int16_t bufferSize;			/**< Size of the audio buffer to be analysed */
@@ -35,12 +35,12 @@ void Yin_init(Yin *yin, int16_t bufferSize, float threshold);
 float Yin_getPitch(Yin *yin, int16_t* buffer);
 
 /**
- * Certainty of the pitch found 
+ * Certainty of the pitch found
  * @param  yin Yin object that has been run over a buffer
  * @return     Returns the certainty of the note found as a decimal (i.e 0.3 is 30%)
  */
 float Yin_getProbability(Yin *yin);
-	
+
 
 
 #endif
