@@ -18,7 +18,7 @@
 int main(int argc, char** argv) {
 	int buffer_length = 100;
 	Yin yin;
-	float pitch;
+	float pitch = -1.0;
 
 	printf("About to test how many samples are needed to detect the pitch in a given signal\n");
 	printf("WARNING: this test has an absolute disregard for memory managment, hang tight this could hurt a little...\n");
