@@ -1,7 +1,7 @@
 import wave, struct
 import matplotlib.pyplot as plt
 
-filename = "OpenE.wav"
+filename = "OpenStrings.wav"
 
 # Open the .wav files and extract all the frames
 waveFile = wave.open(filename, 'r')
@@ -17,7 +17,7 @@ for i in range(0,length):
     audioData.append(data[0])
 
 # Truncate the samples we don't need
-audioData = audioData[1000:2500]
+#audioData = audioData[1000:2500]
 
 # Plot the signal
 plt.plot(audioData)
