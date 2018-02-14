@@ -8,9 +8,9 @@
 
 
 /* Audio array with samples from .wav file
- * contains 
- *     #define NUM_SAMPLES 176400 
- *     int audio[176400] = {...} 
+ * contains
+ *     #define NUM_SAMPLES 176400
+ *     int audio[176400] = {...}
  */
 #include "audioData.h"
 
@@ -28,8 +28,8 @@ int main(int argc, char** argv) {
 		buffer_length++;
 		Yin_free(&yin);
 	}
-	
-	
+
+
 	printf("Pitch is found to be %f with buffer length %i and probabiity %f\n",pitch, buffer_length, Yin_getProbability(&yin) );
 	return 0;
 }
