@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.noise_planet</groupId>
-    <artifactId>openwarble</artifactId>
+    <artifactId>yin</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -59,7 +59,7 @@
                 <version>${gcc.bridge.version}</version>
                 <configuration>
                     <!-- Sets the package name of all generated classes -->
-                    <packageName>org.noise_planet.openwarble</packageName>
+                    <packageName>org.noise_planet.yin</packageName>
                     
                     <!-- If sets, generates a single class
                     <mainClass>YinACF</mainClass>-->

@@ -16,6 +16,11 @@ typedef struct _Yin {
 } Yin;
 
 /**
+ * @return new Instance of Yin struct
+ */
+Yin* Yin_create();
+
+/**
  * Initialise the Yin pitch detection object
  * @param yin        Yin pitch detection object to initialise
  * @param bufferSize Length of the audio buffer to analyse

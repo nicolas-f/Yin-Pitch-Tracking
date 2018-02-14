@@ -158,7 +158,12 @@ float Yin_parabolicInterpolation(Yin *yin, int16_t tauEstimate) {
 ---------------------------------------------------------------------------- PUBLIC FUNCTIONS
 -------------------------------------------------------------------------------------------*/
 
-
+/**
+ * @return new Instance of Yin struct
+ */
+Yin* Yin_create() {
+    return malloc(sizeof(Yin));
+}
 
 /**
  * Initialise the Yin pitch detection object
