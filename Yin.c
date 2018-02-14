@@ -183,6 +183,14 @@ void Yin_init(Yin *yin, int16_t bufferSize, float threshold){
 }
 
 /**
+ * Free buffer in the Yin pitch detection object
+ * @param yin        Yin pitch detection object to free
+ */
+void Yin_free(Yin *yin){
+	free(yin->yinBuffer);
+}
+
+/**
  * Runs the Yin pitch detection algortihm
  * @param  yin    Initialised Yin object
  * @param  buffer Buffer of samples to analyse

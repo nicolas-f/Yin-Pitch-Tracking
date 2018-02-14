@@ -21,12 +21,12 @@ int main(int argc, char** argv) {
 	float pitch;
 
 	printf("About to test how many samples are needed to detect the pitch in a given signal\n");
-	printf("WARNING: this test has an absolute disregard for memory managment, hang tight this could hurt a little...\n");
 
 	while (pitch < 10 ) {
 		Yin_init(&yin, buffer_length, 0.05);
 		pitch = Yin_getPitch(&yin, audio);	
 		buffer_length++;
+		Yin_free(&yin);
 	}
 	
 	
