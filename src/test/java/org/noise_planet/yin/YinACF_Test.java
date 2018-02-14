@@ -20,7 +20,7 @@ public class YinACF_Test {
 
         // Make 1000 Hz signal
         final int sampleRate = 44100;
-        final int window = (int) Math.ceil(sampleRate * 0.05);
+        final int window = (int) Math.ceil(sampleRate * 0.0872);
         final int signalFrequency = 1000;
         double powerRMS = 2500; // 90 dBspl
         double powerPeak = powerRMS * Math.sqrt(2);
@@ -38,7 +38,10 @@ public class YinACF_Test {
 
         float freq = Yin.Yin_getPitch(yin, array, sampleRate);
 
-        System.out.println("Window: "+window+"Evaluate time " + (System.currentTimeMillis() - begin)+ " ms");
+        System.out.println("Window: "+window+" samples\n" +
+                "Frequency: "+freq+"Hz\n" +
+                "Probability:"+Math.round(Yin.Yin_getProbability(yin) * 100)+" %\n" +
+                "Evaluate time " + (System.currentTimeMillis() - begin)+ " ms");
 
         assertEquals(signalFrequency, freq, 1.);
 
