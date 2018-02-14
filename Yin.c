@@ -192,11 +192,12 @@ void Yin_free(Yin *yin){
 
 /**
  * Runs the Yin pitch detection algortihm
- * @param  yin    Initialised Yin object
- * @param  buffer Buffer of samples to analyse
- * @return        Fundamental frequency of the signal in Hz. Returns -1 if pitch can't be found
+ * @param  yin           Initialised Yin object
+ * @param  buffer        Buffer of samples to analyse
+ * @param  sampling_Rate Sampling rate of buffer
+ * @return               Fundamental frequency of the signal in Hz. Returns -1 if pitch can't be found
  */
-float Yin_getPitch(Yin *yin, int16_t* buffer){
+float Yin_getPitch(Yin *yin, int16_t* buffer, int sampling_rate){
 	int16_t tauEstimate = -1;
 	float pitchInHertz = -1;
 	
@@ -211,7 +212,7 @@ float Yin_getPitch(Yin *yin, int16_t* buffer){
 	
 	/* Step 5: Interpolate the shift value (tau) to improve the pitch estimate. */
 	if(tauEstimate != -1){
-		pitchInHertz = YIN_SAMPLING_RATE / Yin_parabolicInterpolation(yin, tauEstimate);
+		pitchInHertz = sampling_rate / Yin_parabolicInterpolation(yin, tauEstimate);
 	}
 	
 	return pitchInHertz;
