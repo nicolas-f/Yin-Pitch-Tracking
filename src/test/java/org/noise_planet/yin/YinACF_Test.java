@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.ShortBuffer;
 import java.util.Arrays;
+import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,6 +20,19 @@ import static org.junit.Assert.assertTrue;
  * Example of using a compiled C function from Java
  */
 public class YinACF_Test {
+
+    public static double computeRms(short[] inputSignal) {
+        double sampleSum = 0;
+        for (short sample : inputSignal) {
+            sampleSum += sample * sample;
+        }
+        return Math.sqrt(sampleSum / inputSignal.length);
+    }
+
+    public static double todBspl(double rms, double refSoundPressure ) {
+        return 20 * Math.log10(rms / refSoundPressure);
+    }
+
 
     public static short[] convertBytesToShort(byte[] buffer, int length, ByteOrder byteOrder) {
         ShortBuffer byteBuffer = ByteBuffer.wrap(buffer, 0, length).order(byteOrder).asShortBuffer();
@@ -56,7 +70,7 @@ public class YinACF_Test {
 
         // Make 1000 Hz signal
         final int sampleRate = 44100;
-        double windowTime = 0.0872;
+        double windowTime = 0.025;
         final int window = (int) Math.ceil(sampleRate * windowTime);
         final int signalFrequency = 1000;
         double powerRMS = 2500; // 90 dBspl
@@ -94,9 +108,9 @@ public class YinACF_Test {
         InputStream inputStream = YinACF_Test.class.getResourceAsStream("raw1_44100_16bitPCM.raw");
         short[] signal = loadShortStream(inputStream, ByteOrder.LITTLE_ENDIAN);
 
-        double windowTime = 0.07;
+        double windowTime = 0.025;
         final int sampleRate = 44100;
-        final int window = (int) Math.ceil(sampleRate * windowTime);
+        int window = (int) Math.ceil(sampleRate * windowTime);
 
         Ptr yin = Yin.Yin_create();
         Yin.Yin_init(yin, (short)window, 0.1f);
@@ -123,6 +137,19 @@ public class YinACF_Test {
             testId++;
         }
 
+
+        // Debug
+        System.out.println("time(s),frequency(Hz),probability(%),spl(dB)");
+        for(double startTime = 0; startTime < signal.length / sampleRate - windowTime; startTime+=windowTime) {
+            final int startSample = (int)(startTime * sampleRate);
+            ShortPtr array = new ShortPtr(Arrays.copyOfRange(signal, startSample,startSample + window));
+            float freq = Yin.Yin_getPitch(yin, array, sampleRate);
+            float perc = Yin.Yin_getProbability(yin);
+            if(freq > 0) {
+                double spl = todBspl(computeRms(array.getArray()), 1);
+                System.out.println(String.format(Locale.ROOT ,"%.3f,%.0f,%.0f,%.1f", startTime, freq, (double)Math.round(perc * 100), spl));
+            }
+        }
 
     }
 
